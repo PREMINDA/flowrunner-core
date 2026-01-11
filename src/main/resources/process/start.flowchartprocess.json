@@ -1,8 +1,8 @@
 {
     "id": "process-1768132302828",
-    "name": "start",
+    "name": "first",
     "type": "processNode",
-    "filename": "src/main/resources/process/start.flowchartprocess.json",
+    "filename": "process/first.flowchartprocess.json",
     "blackboard": {
         "variables": []
     },
@@ -95,6 +95,16 @@
             "id": "reactflow__edge-actionNode-1768132306486exec-out-calltoProcessNode-1768132326754exec-in"
         },
         {
+            "markerEnd": {
+                "type": "arrowclosed",
+                "width": 8,
+                "height": 8,
+                "color": "var(--primary)"
+            },
+            "style": {
+                "strokeWidth": 2.5,
+                "stroke": "var(--primary)"
+            },
             "source": "calltoProcessNode-1768132326754",
             "sourceHandle": "exec-out",
             "target": "actionNode-1768132953883",

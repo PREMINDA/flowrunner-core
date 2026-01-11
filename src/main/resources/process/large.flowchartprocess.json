@@ -2,7 +2,7 @@
     "id": "process-1768132423945",
     "name": "large",
     "type": "processNode",
-    "filename": "src/main/resources/process/large.flowchartprocess.json",
+    "filename": "process/large.flowchartprocess.json",
     "blackboard": {
         "variables": []
     },
