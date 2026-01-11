@@ -1,7 +1,6 @@
 package com.flowrunner.core.cache;
 
 import com.flowrunner.core.model.ProcessNode;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Optional;
