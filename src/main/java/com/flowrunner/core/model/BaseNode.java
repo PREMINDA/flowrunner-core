@@ -9,7 +9,8 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = CallProcessNode.class, name = "callProcessNode"),
+        @JsonSubTypes.Type(value = ProcessNode.class, name = "processNode"),
+        @JsonSubTypes.Type(value = CalltoProcessNode.class, name = "calltoProcessNode"),
         @JsonSubTypes.Type(value = StartNode.class, name = "startNode"),
         @JsonSubTypes.Type(value = ActionNode.class, name = "actionNode")
 })
