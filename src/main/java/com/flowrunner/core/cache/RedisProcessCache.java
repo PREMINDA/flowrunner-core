@@ -2,7 +2,7 @@ package com.flowrunner.core.cache;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flowrunner.core.model.CallProcessNode;
+import com.flowrunner.core.model.ProcessNode;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -21,12 +21,12 @@ public class RedisProcessCache implements ProcessCache {
     }
 
     @Override
-    public Optional<CallProcessNode> getProcess(String id) {
+    public Optional<ProcessNode> getProcess(String id) {
         try (Jedis jedis = jedisPool.getResource()) {
             String json = jedis.get("process:" + id);
             if (json != null) {
                 try {
-                    CallProcessNode process = mapper.readValue(json, CallProcessNode.class);
+                    ProcessNode process = mapper.readValue(json, ProcessNode.class);
                     return Optional.of(process);
                 } catch (JsonProcessingException e) {
                     System.err.println("[Redis] Failed to parse JSON for " + id);
@@ -40,7 +40,7 @@ public class RedisProcessCache implements ProcessCache {
     }
 
     @Override
-    public void cacheProcess(CallProcessNode process) {
+    public void cacheProcess(ProcessNode process) {
         if (process == null || process.getId() == null)
             return;
 

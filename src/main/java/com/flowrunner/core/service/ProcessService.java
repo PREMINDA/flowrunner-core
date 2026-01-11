@@ -1,7 +1,7 @@
 package com.flowrunner.core.service;
 
 import com.flowrunner.core.cache.ProcessCache;
-import com.flowrunner.core.model.CallProcessNode;
+import com.flowrunner.core.model.ProcessNode;
 import com.flowrunner.core.util.JsonLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ProcessService {
         this.processCache = processCache;
     }
 
-    public CallProcessNode getProcess(String resourceName) throws IOException {
+    public ProcessNode getProcess(String resourceName) throws IOException {
         // Limitation: In a real system you'd lookup by ID, not path.
         // For this demo, we assume the ID is inside the file, so we have to load it to
         // check the cache efficiently,
@@ -47,10 +47,10 @@ public class ProcessService {
         // We will cache by ResourceName/ID for now.
         // Or better: Load resource, get ID, check cache.
 
-        CallProcessNode loaded = JsonLoader.loadProcessFromResource(resourceName);
+        ProcessNode loaded = JsonLoader.loadProcessFromResource(resourceName);
         String processId = loaded.getId();
 
-        Optional<CallProcessNode> cached = processCache.getProcess(processId);
+        Optional<ProcessNode> cached = processCache.getProcess(processId);
         if (cached.isPresent()) {
             System.out.println("[Service] Cache HIT for " + processId);
             return cached.get();

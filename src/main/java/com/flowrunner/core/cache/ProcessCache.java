@@ -1,10 +1,10 @@
 package com.flowrunner.core.cache;
 
-import com.flowrunner.core.model.CallProcessNode;
+import com.flowrunner.core.model.ProcessNode;
 import java.util.Optional;
 
 public interface ProcessCache {
-    Optional<CallProcessNode> getProcess(String id);
+    Optional<ProcessNode> getProcess(String id);
 
-    void cacheProcess(CallProcessNode process);
+    void cacheProcess(ProcessNode process);
 }

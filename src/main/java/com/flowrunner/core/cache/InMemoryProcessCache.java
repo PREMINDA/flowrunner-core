@@ -1,6 +1,6 @@
 package com.flowrunner.core.cache;
 
-import com.flowrunner.core.model.CallProcessNode;
+import com.flowrunner.core.model.ProcessNode;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -9,18 +9,18 @@ import java.util.concurrent.ConcurrentHashMap;
 
 // Managed manually in AppConfig now
 public class InMemoryProcessCache implements ProcessCache {
-    private final Map<String, CallProcessNode> cache = new ConcurrentHashMap<>();
+    private final Map<String, ProcessNode> cache = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<CallProcessNode> getProcess(String id) {
+    public Optional<ProcessNode> getProcess(String id) {
         return Optional.ofNullable(cache.get(id));
     }
 
     @Override
-    public void cacheProcess(CallProcessNode process) {
-        if (process != null && process.getId() != null) {
-            cache.put(process.getId(), process);
-            System.out.println("[Cache] Stored process: " + process.getId());
-        }
+    public void cacheProcess(ProcessNode process) {
+        if (process == null || process.getId() == null)
+            return;
+        cache.put(process.getId(), process);
+        System.out.println("[Cache] Stored process: " + process.getId());
     }
 }
