@@ -5,7 +5,6 @@ import com.flowrunner.core.action.FlowAction;
 import com.flowrunner.core.model.*;
 import com.flowrunner.core.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,9 +20,6 @@ public class FlowEngine {
 
     @Autowired
     private ProcessService processService;
-
-    @Value("${flowrunner.node.start-type:startNode}")
-    private String startNodeType;
 
     // Run a process (ProcessNode is the container)
     public void run(ProcessNode process) {
@@ -98,8 +94,7 @@ public class FlowEngine {
         if (process.getNodes() == null)
             return null;
         for (BaseNode node : process.getNodes().values()) {
-            // Check based on configured type string
-            if (startNodeType.equals(node.getType())) {
+            if (node instanceof StartNode) {
                 return node;
             }
         }

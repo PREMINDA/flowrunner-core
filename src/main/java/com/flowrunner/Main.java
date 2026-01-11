@@ -16,7 +16,11 @@ public class Main {
             ProcessService processService = context.getBean(ProcessService.class);
 
             try {
-                String jsonPath = "process/start.flowchartprocess.json";
+                String jsonPath = context.getEnvironment().getProperty("flowrunner.process.entry-path");
+                if (jsonPath == null) {
+                    System.err.println("Property flowrunner.process.entry-path not found!");
+                    return;
+                }
                 System.out.println("Loading process: " + jsonPath);
 
                 ProcessNode process = processService.getProcess(jsonPath);
