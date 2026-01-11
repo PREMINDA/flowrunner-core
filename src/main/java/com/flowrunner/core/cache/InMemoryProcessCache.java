@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Component
+// Managed manually in AppConfig now
 public class InMemoryProcessCache implements ProcessCache {
     private final Map<String, CallProcessNode> cache = new ConcurrentHashMap<>();
 
