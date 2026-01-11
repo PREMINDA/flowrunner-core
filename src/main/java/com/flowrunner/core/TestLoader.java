@@ -1,11 +1,9 @@
 package com.flowrunner.core;
 
 import com.flowrunner.config.AppConfig;
-import com.flowrunner.core.action.FlowAction;
-import com.flowrunner.core.model.ActionNode;
-import com.flowrunner.core.model.BaseNode;
+import com.flowrunner.core.engine.FlowEngine;
 import com.flowrunner.core.model.CallProcessNode;
-import com.flowrunner.core.util.JsonLoader;
+import com.flowrunner.core.service.ProcessService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -15,39 +13,23 @@ public class TestLoader {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
+        FlowEngine engine = context.getBean(FlowEngine.class);
+        ProcessService processService = context.getBean(ProcessService.class);
+
         try {
             String jsonPath = "asd.json";
-            CallProcessNode process = JsonLoader.loadProcess(jsonPath);
 
-            System.out.println("Successfully loaded process: " + process.getId());
+            System.out.println("--- Run 1 (Fetch from File) ---");
+            CallProcessNode process1 = processService.getProcess(jsonPath);
+            engine.run(process1);
 
-            if (process.getNodes() != null) {
-                for (BaseNode node : process.getNodes()) {
-                    System.out.println(" - Visiting node: " + node.getId() + " (" + node.getType() + ")");
-
-                    if (node instanceof ActionNode) {
-                        String className = ((ActionNode) node).getJavaClassName();
-                        if (className != null) {
-                            System.out.println("   Resolution: " + className);
-                            try {
-                                Class<?> actionClass = Class.forName(className);
-                                if (FlowAction.class.isAssignableFrom(actionClass)) {
-                                    FlowAction action = (FlowAction) context.getBean(actionClass);
-                                    action.execute(node.getData());
-                                } else {
-                                    System.err
-                                            .println("   Error: Class " + className + " does not implement FlowAction");
-                                }
-                            } catch (ClassNotFoundException e) {
-                                System.err.println("   Error: Class not found: " + className);
-                            } catch (Exception e) {
-                                System.err.println("   Error executing bean: " + e.getMessage());
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-            }
+            System.out.println("\n--- Run 2 (Fetch from Cache) ---");
+            // The service checks cache by ID. Since process1 was loaded and cached,
+            // the second call should hit the cache if the ID matches.
+            // Note: Our service logic currently loads file to get ID then checks cache.
+            // This demonstrates the repo pattern logic.
+            CallProcessNode process2 = processService.getProcess(jsonPath);
+            engine.run(process2);
 
         } catch (IOException e) {
             System.err.println("Failed to load JSON: " + e.getMessage());
