@@ -42,8 +42,8 @@ public class FlowEngine {
 
             if (currentNode instanceof ActionNode) {
                 executeAction((ActionNode) currentNode);
-            } else if (currentNode instanceof CalltoProcessNode) {
-                executeSubProcess((CalltoProcessNode) currentNode);
+            } else if (currentNode instanceof CallProcessNode) {
+                executeSubProcess((CallProcessNode) currentNode);
             }
 
             currentNode = findNextNode(currentNode, process);
@@ -51,7 +51,7 @@ public class FlowEngine {
         System.out.println("Process execution finished.");
     }
 
-    private void executeSubProcess(CalltoProcessNode callNode) {
+    private void executeSubProcess(CallProcessNode callNode) {
         String subProcessId = callNode.getCallToProcess();
         if (subProcessId != null && !subProcessId.isEmpty()) {
             System.out.println("   [Sub-Process] Calling: " + subProcessId);
