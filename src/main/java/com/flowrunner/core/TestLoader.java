@@ -17,7 +17,7 @@ public class TestLoader {
         ProcessService processService = context.getBean(ProcessService.class);
 
         try {
-            String jsonPath = "process/asd.json";
+            String jsonPath = "process/start.flowchartprocess.json";
 
             System.out.println("--- Run 1 (Fetch from Resource) ---");
             ProcessNode process1 = processService.getProcess(jsonPath);
