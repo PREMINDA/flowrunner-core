@@ -1,0 +1,184 @@
+{
+    "id": "process-1768114152427",
+    "name": "My Process",
+    "blackboard": {
+        "variables": [
+            {
+                "id": "newvar1",
+                "name": "NewVar1",
+                "type": "string",
+                "defaultValue": "asd"
+            },
+            {
+                "id": "newvar2",
+                "name": "NewVar2",
+                "type": "string",
+                "defaultValue": "value2"
+            },
+            {
+                "id": "newvar3",
+                "name": "NewVar3",
+                "type": "string",
+                "defaultValue": "value3"
+            },
+            {
+                "id": "newvar4",
+                "name": "NewVar4",
+                "type": "string",
+                "defaultValue": "value4"
+            },
+            {
+                "id": "newvar5",
+                "name": "NewVar5",
+                "type": "string",
+                "defaultValue": "value5"
+            }
+        ]
+    },
+    "nodes": [
+        {
+            "id": "startNode-1768071291661",
+            "type": "startNode",
+            "position": {
+                "x": -51.845320682648605,
+                "y": 335.73097126149844
+            },
+            "data": {
+                "label": "Start"
+            },
+            "width": 100,
+            "height": 40,
+            "selected": false,
+            "positionAbsolute": {
+                "x": -51.845320682648605,
+                "y": 335.73097126149844
+            },
+            "dragging": false
+        },
+        {
+            "id": "actionNode-1768071287395",
+            "type": "actionNode",
+            "position": {
+                "x": 287.5762919441469,
+                "y": 45.84961720965367
+            },
+            "data": {
+                "label": "My Action 1",
+                "inputs": {
+                    "NewVar1": {
+                        "variableId": "newvar1",
+                        "type": "string"
+                    },
+                    "NewVar2": {
+                        "variableId": "newvar2",
+                        "type": "string"
+                    }
+                },
+                "outputs": {
+                    "NewVar1": {
+                        "variableId": "newvar1",
+                        "type": "string"
+                    }
+                },
+                "javaClassName": "com.flow.Test"
+            },
+            "width": 200,
+            "height": 276,
+            "selected": true,
+            "positionAbsolute": {
+                "x": 287.5762919441469,
+                "y": 45.84961720965367
+            },
+            "dragging": false
+        },
+        {
+            "id": "noteNode-1768088968927",
+            "type": "noteNode",
+            "position": {
+                "x": 196.76091856099026,
+                "y": -230.1573907051521
+            },
+            "data": {
+                "label": "Note",
+                "note": "sfdfsdfsdfsdfsdfsdfsdf"
+            },
+            "width": 180,
+            "height": 128,
+            "selected": false,
+            "dragging": false,
+            "positionAbsolute": {
+                "x": 196.76091856099026,
+                "y": -230.1573907051521
+            }
+        },
+        {
+            "id": "actionNode-1768090149546",
+            "type": "actionNode",
+            "position": {
+                "x": 557.546212052877,
+                "y": 46.24610461618633
+            },
+            "data": {
+                "label": "My Action"
+            },
+            "width": 200,
+            "height": 233,
+            "selected": false,
+            "positionAbsolute": {
+                "x": 557.546212052877,
+                "y": 46.24610461618633
+            },
+            "dragging": false
+        },
+        {
+            "id": "callProcessNode-1768113298839",
+            "type": "callProcessNode",
+            "position": {
+                "x": -46.149806984301506,
+                "y": -90.12561475465314
+            },
+            "data": {
+                "label": "Call Process"
+            },
+            "width": 200,
+            "height": 233,
+            "selected": false,
+            "positionAbsolute": {
+                "x": -46.149806984301506,
+                "y": -90.12561475465314
+            },
+            "dragging": false
+        },
+        {
+            "id": "assignNode-1768113344463",
+            "type": "assignNode",
+            "position": {
+                "x": 790.3798687764714,
+                "y": 76.90423799626025
+            },
+            "data": {
+                "label": "Assign Node"
+            },
+            "width": 200,
+            "height": 70,
+            "selected": false,
+            "dragging": false
+        }
+    ],
+    "edges": [
+        {
+            "source": "startNode-1768071291661",
+            "sourceHandle": "exec-out",
+            "target": "actionNode-1768071287395",
+            "targetHandle": "exec-in",
+            "id": "edge-1"
+        },
+        {
+            "source": "actionNode-1768071287395",
+            "sourceHandle": "exec-out",
+            "target": "actionNode-1768090149546",
+            "targetHandle": "exec-in",
+            "id": "reactflow__edge-actionNode-1768071287395exec-out-actionNode-1768090149546exec-in"
+        }
+    ]
+}
