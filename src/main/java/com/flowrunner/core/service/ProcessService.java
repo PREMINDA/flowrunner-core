@@ -19,11 +19,11 @@ public class ProcessService {
         this.processCache = processCache;
     }
 
-    public CallProcessNode getProcess(String filePath) throws IOException {
+    public CallProcessNode getProcess(String resourceName) throws IOException {
         // Limitation: In a real system you'd lookup by ID, not path.
         // For this demo, we assume the ID is inside the file, so we have to load it to
         // check the cache efficiently,
-        // OR we just cache by filePath/ID after first load.
+        // OR we just cache by resourceName/ID after first load.
         // Let's implement a simple optimize:
         // 1. Load file (this part is "expensive" I/O)
         // 2. Check cache by ID found in file.
@@ -40,14 +40,14 @@ public class ProcessService {
         // "process-123" in cache.
         // If missing, it goes to DB/File.
 
-        // Let's modify to assume the 'filePath' is the source of truth for the
+        // Let's modify to assume the 'resourceName' is the source of truth for the
         // definition.
 
-        // Optimized approach for this demo file-based structure:
-        // We will cache by FilePath for now to avoid re-reading the file.
-        // Or better: Load the file, get ID, check cache.
+        // Optimized approach for this demo:
+        // We will cache by ResourceName/ID for now.
+        // Or better: Load resource, get ID, check cache.
 
-        CallProcessNode loaded = JsonLoader.loadProcess(filePath);
+        CallProcessNode loaded = JsonLoader.loadProcessFromResource(resourceName);
         String processId = loaded.getId();
 
         Optional<CallProcessNode> cached = processCache.getProcess(processId);

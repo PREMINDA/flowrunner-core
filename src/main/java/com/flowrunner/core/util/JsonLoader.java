@@ -18,4 +18,12 @@ public class JsonLoader {
     public static CallProcessNode loadProcess(File file) throws IOException {
         return mapper.readValue(file, CallProcessNode.class);
     }
+
+    public static CallProcessNode loadProcessFromResource(String resourceName) throws IOException {
+        java.io.InputStream is = JsonLoader.class.getClassLoader().getResourceAsStream(resourceName);
+        if (is == null) {
+            throw new IOException("Resource not found: " + resourceName);
+        }
+        return mapper.readValue(is, CallProcessNode.class);
+    }
 }
