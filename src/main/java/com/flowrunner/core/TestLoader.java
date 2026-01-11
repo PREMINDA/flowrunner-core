@@ -2,7 +2,7 @@ package com.flowrunner.core;
 
 import com.flowrunner.config.AppConfig;
 import com.flowrunner.core.engine.FlowEngine;
-import com.flowrunner.core.model.CallProcessNode;
+import com.flowrunner.core.model.ProcessNode;
 import com.flowrunner.core.service.ProcessService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -17,10 +17,10 @@ public class TestLoader {
         ProcessService processService = context.getBean(ProcessService.class);
 
         try {
-            String jsonPath = "processes/asd.json";
+            String jsonPath = "process/asd.json";
 
             System.out.println("--- Run 1 (Fetch from Resource) ---");
-            CallProcessNode process1 = processService.getProcess(jsonPath);
+            ProcessNode process1 = processService.getProcess(jsonPath);
             engine.run(process1);
 
             System.out.println("\n--- Run 2 (Fetch from Cache) ---");
@@ -28,7 +28,7 @@ public class TestLoader {
             // the second call should hit the cache if the ID matches.
             // Note: Our service logic currently loads file to get ID then checks cache.
             // This demonstrates the repo pattern logic.
-            CallProcessNode process2 = processService.getProcess(jsonPath);
+            ProcessNode process2 = processService.getProcess(jsonPath);
             engine.run(process2);
 
         } catch (IOException e) {
