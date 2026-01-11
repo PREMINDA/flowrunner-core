@@ -1,184 +1,105 @@
 {
-    "id": "process-1768114152427",
+    "id": "process-1768119040740",
     "name": "My Process",
+    "type": "callProcessNode",
     "blackboard": {
-        "variables": [
-            {
-                "id": "newvar1",
-                "name": "NewVar1",
-                "type": "string",
-                "defaultValue": "asd"
-            },
-            {
-                "id": "newvar2",
-                "name": "NewVar2",
-                "type": "string",
-                "defaultValue": "value2"
-            },
-            {
-                "id": "newvar3",
-                "name": "NewVar3",
-                "type": "string",
-                "defaultValue": "value3"
-            },
-            {
-                "id": "newvar4",
-                "name": "NewVar4",
-                "type": "string",
-                "defaultValue": "value4"
-            },
-            {
-                "id": "newvar5",
-                "name": "NewVar5",
-                "type": "string",
-                "defaultValue": "value5"
-            }
-        ]
+        "variables": []
     },
     "nodes": [
         {
-            "id": "startNode-1768071291661",
+            "id": "startNode-1768119042661",
             "type": "startNode",
             "position": {
-                "x": -51.845320682648605,
-                "y": 335.73097126149844
+                "x": -111.5,
+                "y": 286
             },
             "data": {
-                "label": "Start"
+                "label": "Start Node"
             },
             "width": 100,
             "height": 40,
             "selected": false,
             "positionAbsolute": {
-                "x": -51.845320682648605,
-                "y": 335.73097126149844
+                "x": -111.5,
+                "y": 286
             },
             "dragging": false
         },
         {
-            "id": "actionNode-1768071287395",
+            "id": "actionNode-1768119074649",
             "type": "actionNode",
             "position": {
-                "x": 287.5762919441469,
-                "y": 45.84961720965367
+                "x": 109.5,
+                "y": 294
             },
+            "javaClassName": "com.example.DemoAction",
             "data": {
-                "label": "My Action 1",
-                "inputs": {
-                    "NewVar1": {
-                        "variableId": "newvar1",
-                        "type": "string"
-                    },
-                    "NewVar2": {
-                        "variableId": "newvar2",
-                        "type": "string"
-                    }
-                },
-                "outputs": {
-                    "NewVar1": {
-                        "variableId": "newvar1",
-                        "type": "string"
-                    }
-                },
-                "javaClassName": "com.flow.Test"
+                "label": "Action Node"
             },
             "width": 200,
-            "height": 276,
+            "height": 233,
+            "selected": false,
+            "positionAbsolute": {
+                "x": 109.5,
+                "y": 294
+            },
+            "dragging": false
+        },
+        {
+            "id": "actionNode-1768119082893",
+            "type": "actionNode",
+            "position": {
+                "x": 353.5,
+                "y": 294
+            },
+            "javaClassName": "com.example.DemoAction",
+            "data": {
+                "label": "Action Node"
+            },
+            "width": 200,
+            "height": 233,
             "selected": true,
             "positionAbsolute": {
-                "x": 287.5762919441469,
-                "y": 45.84961720965367
+                "x": 353.5,
+                "y": 294
             },
-            "dragging": false
-        },
-        {
-            "id": "noteNode-1768088968927",
-            "type": "noteNode",
-            "position": {
-                "x": 196.76091856099026,
-                "y": -230.1573907051521
-            },
-            "data": {
-                "label": "Note",
-                "note": "sfdfsdfsdfsdfsdfsdfsdf"
-            },
-            "width": 180,
-            "height": 128,
-            "selected": false,
-            "dragging": false,
-            "positionAbsolute": {
-                "x": 196.76091856099026,
-                "y": -230.1573907051521
-            }
-        },
-        {
-            "id": "actionNode-1768090149546",
-            "type": "actionNode",
-            "position": {
-                "x": 557.546212052877,
-                "y": 46.24610461618633
-            },
-            "data": {
-                "label": "My Action"
-            },
-            "width": 200,
-            "height": 233,
-            "selected": false,
-            "positionAbsolute": {
-                "x": 557.546212052877,
-                "y": 46.24610461618633
-            },
-            "dragging": false
-        },
-        {
-            "id": "callProcessNode-1768113298839",
-            "type": "callProcessNode",
-            "position": {
-                "x": -46.149806984301506,
-                "y": -90.12561475465314
-            },
-            "data": {
-                "label": "Call Process"
-            },
-            "width": 200,
-            "height": 233,
-            "selected": false,
-            "positionAbsolute": {
-                "x": -46.149806984301506,
-                "y": -90.12561475465314
-            },
-            "dragging": false
-        },
-        {
-            "id": "assignNode-1768113344463",
-            "type": "assignNode",
-            "position": {
-                "x": 790.3798687764714,
-                "y": 76.90423799626025
-            },
-            "data": {
-                "label": "Assign Node"
-            },
-            "width": 200,
-            "height": 70,
-            "selected": false,
             "dragging": false
         }
     ],
     "edges": [
         {
-            "source": "startNode-1768071291661",
+            "markerEnd": {
+                "type": "arrowclosed",
+                "width": 8,
+                "height": 8,
+                "color": "var(--primary)"
+            },
+            "style": {
+                "strokeWidth": 2.5,
+                "stroke": "var(--primary)"
+            },
+            "source": "startNode-1768119042661",
             "sourceHandle": "exec-out",
-            "target": "actionNode-1768071287395",
+            "target": "actionNode-1768119074649",
             "targetHandle": "exec-in",
-            "id": "edge-1"
+            "id": "reactflow__edge-startNode-1768119042661exec-out-actionNode-1768119074649exec-in"
         },
         {
-            "source": "actionNode-1768071287395",
+            "markerEnd": {
+                "type": "arrowclosed",
+                "width": 8,
+                "height": 8,
+                "color": "var(--primary)"
+            },
+            "style": {
+                "strokeWidth": 2.5,
+                "stroke": "var(--primary)"
+            },
+            "source": "actionNode-1768119074649",
             "sourceHandle": "exec-out",
-            "target": "actionNode-1768090149546",
+            "target": "actionNode-1768119082893",
             "targetHandle": "exec-in",
-            "id": "reactflow__edge-actionNode-1768071287395exec-out-actionNode-1768090149546exec-in"
+            "id": "reactflow__edge-actionNode-1768119074649exec-out-actionNode-1768119082893exec-in"
         }
     ]
 }
