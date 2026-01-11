@@ -5,6 +5,7 @@ import com.flowrunner.core.action.FlowAction;
 import com.flowrunner.core.model.*;
 import com.flowrunner.core.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,9 @@ public class FlowEngine {
     @Autowired
     private ProcessService processService;
 
+    @Value("${flowrunner.node.start-type:startNode}")
+    private String startNodeType;
+
     // Run a process (ProcessNode is the container)
     public void run(ProcessNode process) {
         if (process == null)
@@ -28,7 +32,7 @@ public class FlowEngine {
         System.out.println("Starting process execution: " + process.getName());
 
         // 1. Find StartNode
-        StartNode startNode = findStartNode(process);
+        BaseNode startNode = findStartNode(process);
         if (startNode == null) {
             System.err.println("No StartNode found!");
             return;
@@ -90,12 +94,13 @@ public class FlowEngine {
         }
     }
 
-    private StartNode findStartNode(ProcessNode process) {
+    private BaseNode findStartNode(ProcessNode process) {
         if (process.getNodes() == null)
             return null;
         for (BaseNode node : process.getNodes().values()) {
-            if (node instanceof StartNode) {
-                return (StartNode) node;
+            // Check based on configured type string
+            if (startNodeType.equals(node.getType())) {
+                return node;
             }
         }
         return null;
