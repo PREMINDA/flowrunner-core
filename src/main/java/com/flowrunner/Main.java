@@ -2,8 +2,8 @@ package com.flowrunner;
 
 import com.flowrunner.config.AppConfig;
 import com.flowrunner.core.engine.FlowEngine;
-import com.flowrunner.core.model.ProcessNode;
-import com.flowrunner.core.service.ProcessService;
+import com.flowrunner.core.model.FlowDef;
+import com.flowrunner.core.service.FlowService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class Main {
         System.out.println("Starting FlowRunner Application...");
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class)) {
             FlowEngine engine = context.getBean(FlowEngine.class);
-            ProcessService processService = context.getBean(ProcessService.class);
+            FlowService processService = context.getBean(FlowService.class);
 
             try {
                 String jsonPath = context.getEnvironment().getProperty("flowrunner.process.entry-path");
@@ -23,7 +23,11 @@ public class Main {
                 }
                 System.out.println("Loading process: " + jsonPath);
 
-                ProcessNode process = processService.getProcess(jsonPath);
+                FlowDef process = processService.getProcess(jsonPath);
+                engine.run(process);
+
+                System.out.println("---------------------------------------------------------------------------------------------");
+
                 engine.run(process);
 
             } catch (IOException e) {

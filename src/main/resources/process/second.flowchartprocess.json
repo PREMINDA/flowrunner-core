@@ -11,8 +11,8 @@
       "id": "startNode-1768144829911",
       "type": "startNode",
       "position": {
-        "x": -25,
-        "y": 350.5
+        "x": -22.425871836184626,
+        "y": 338.91642326283073
       },
       "data": {
         "label": "Start Node"
@@ -21,8 +21,8 @@
       "height": 40,
       "selected": false,
       "positionAbsolute": {
-        "x": -25,
-        "y": 350.5
+        "x": -22.425871836184626,
+        "y": 338.91642326283073
       },
       "dragging": false
     },
@@ -30,18 +30,18 @@
       "id": "actionNode-1768144834924",
       "type": "actionNode",
       "position": {
-        "x": 245.64971474177804,
-        "y": 319.607036133886
+        "x": 249.14971474177804,
+        "y": 241.63758103619512
       },
       "data": {
         "label": "Action Node"
       },
       "width": 200,
-      "height": 233,
-      "selected": true,
+      "height": 247,
+      "selected": false,
       "positionAbsolute": {
-        "x": 245.64971474177804,
-        "y": 319.607036133886
+        "x": 249.14971474177804,
+        "y": 241.63758103619512
       },
       "dragging": false,
       "javaClassName": "com.example.Testaction"

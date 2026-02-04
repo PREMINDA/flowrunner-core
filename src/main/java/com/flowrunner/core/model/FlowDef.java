@@ -12,11 +12,17 @@ import java.util.Map;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProcessNode extends BaseNode {
+public class FlowDef extends BaseNode {
     private String name;
+    private String filename;
     private Map<String, Object> blackboard; // generic map for blackboard
     private Map<String, BaseNode> nodes = new HashMap<>();
     private Map<String, Edge> edges = new HashMap<>();
+
+
+    private FlowOutComes finalOurCome;
+
+    private StartNode startNode;
 
     @JsonSetter("nodes")
     public void setNodesList(List<BaseNode> nodeList) {
@@ -24,6 +30,9 @@ public class ProcessNode extends BaseNode {
         if (nodeList != null) {
             for (BaseNode node : nodeList) {
                 this.nodes.put(node.getId(), node);
+                if(node instanceof StartNode){
+                    startNode = (StartNode)node;
+                }
             }
         }
     }

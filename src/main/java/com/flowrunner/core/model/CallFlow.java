@@ -7,6 +7,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CalltoProcessNode extends BaseNode {
+public class CallFlow extends BaseNode {
     private String callToProcess;
 }

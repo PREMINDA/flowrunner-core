@@ -1,25 +1,25 @@
 package com.flowrunner.core.cache;
 
-import com.flowrunner.core.model.ProcessNode;
+import com.flowrunner.core.model.FlowDef;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 // Managed manually in AppConfig now
-public class InMemoryProcessCache implements ProcessCache {
-    private final Map<String, ProcessNode> cache = new ConcurrentHashMap<>();
+public class InMemoryProcessCache implements IProcessCache {
+    private final Map<String, FlowDef> cache = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<ProcessNode> getProcess(String id) {
+    public Optional<FlowDef> getProcess(String id) {
         return Optional.ofNullable(cache.get(id));
     }
 
     @Override
-    public void cacheProcess(ProcessNode process) {
-        if (process == null || process.getId() == null)
+    public void cacheProcess(FlowDef process) {
+        if (process == null || process.getFilename() == null)
             return;
-        cache.put(process.getId(), process);
+        cache.put(process.getFilename(), process);
         System.out.println("[Cache] Stored process: " + process.getId());
     }
 }

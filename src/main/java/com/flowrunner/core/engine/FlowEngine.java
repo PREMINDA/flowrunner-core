@@ -2,8 +2,9 @@
 package com.flowrunner.core.engine;
 
 import com.flowrunner.core.action.FlowAction;
+import com.flowrunner.core.debug.FlowDebugger;
 import com.flowrunner.core.model.*;
-import com.flowrunner.core.service.ProcessService;
+import com.flowrunner.core.service.FlowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -19,16 +20,16 @@ public class FlowEngine {
     private ApplicationContext context;
 
     @Autowired
-    private ProcessService processService;
+    private FlowService processService;
 
     // Run a process (ProcessNode is the container)
-    public void run(ProcessNode process) {
+    public void run(FlowDef process) {
         if (process == null)
             return;
         System.out.println("Starting process execution: " + process.getName());
 
         // 1. Find StartNode
-        BaseNode startNode = findStartNode(process);
+        BaseNode startNode = process.getStartNode();
         if (startNode == null) {
             System.err.println("No StartNode found!");
             return;
@@ -36,14 +37,21 @@ public class FlowEngine {
 
         // 2. Traverse
         BaseNode currentNode = startNode;
+
+        
         while (currentNode != null) {
+
+            FlowDebugger.checkBreakpoint(currentNode.getId(), null);
+            // Check for breakpoint before visiting the node
+            // This will block if debug mode is on and node has a breakpoint
+
             System.out.println(
                     " -> Visiting: " + currentNode.getId() + " (" + currentNode.getClass().getSimpleName() + ")");
 
             if (currentNode instanceof ActionNode) {
                 executeAction((ActionNode) currentNode);
-            } else if (currentNode instanceof CalltoProcessNode) {
-                executeSubProcess((CalltoProcessNode) currentNode);
+            } else if (currentNode instanceof CallFlow) {
+                executeSubProcess((CallFlow) currentNode);
             }
 
             currentNode = findNextNode(currentNode, process);
@@ -51,12 +59,12 @@ public class FlowEngine {
         System.out.println("Process execution finished.");
     }
 
-    private void executeSubProcess(CalltoProcessNode callNode) {
+    private void executeSubProcess(CallFlow callNode) {
         String subProcessId = callNode.getCallToProcess();
         if (subProcessId != null && !subProcessId.isEmpty()) {
             System.out.println("   [Sub-Process] Calling: " + subProcessId);
             try {
-                ProcessNode subProcess = processService.getProcess(subProcessId);
+                FlowDef subProcess = processService.getProcess(subProcessId);
                 // Recursively run the sub-process using the same engine instance (stateless
                 // traversal)
                 // or we could spawn a new one. Reuse is fine here.
@@ -90,18 +98,8 @@ public class FlowEngine {
         }
     }
 
-    private BaseNode findStartNode(ProcessNode process) {
-        if (process.getNodes() == null)
-            return null;
-        for (BaseNode node : process.getNodes().values()) {
-            if (node instanceof StartNode) {
-                return node;
-            }
-        }
-        return null;
-    }
 
-    private BaseNode findNextNode(BaseNode current, ProcessNode process) {
+    private BaseNode findNextNode(BaseNode current, FlowDef process) {
         if (process.getEdges() == null)
             return null;
 

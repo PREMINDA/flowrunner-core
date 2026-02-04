@@ -4,15 +4,23 @@
   "type": "processNode",
   "filename": "process/first.flowchartprocess.json",
   "blackboard": {
-    "variables": []
+    "variables": [
+      {
+        "id": "newvar1",
+        "name": "NewVar1",
+        "type": "vector3",
+        "defaultValue": "",
+        "category": "input"
+      }
+    ]
   },
   "nodes": [
     {
       "id": "startNode-1768144762484",
       "type": "startNode",
       "position": {
-        "x": -104.5,
-        "y": 264
+        "x": -74.47800040818191,
+        "y": 336.904445809595
       },
       "data": {
         "label": "Start Node"
@@ -21,8 +29,8 @@
       "height": 40,
       "selected": false,
       "positionAbsolute": {
-        "x": -104.5,
-        "y": 264
+        "x": -74.47800040818191,
+        "y": 336.904445809595
       },
       "dragging": false
     },
@@ -30,18 +38,24 @@
       "id": "actionNode-1768144777222",
       "type": "actionNode",
       "position": {
-        "x": 130.5,
-        "y": 240.5
+        "x": 197.76760151257253,
+        "y": -322.9897411518706
       },
       "data": {
-        "label": "Action Node"
+        "label": "Action Node",
+        "inputs": {
+          "NewVar1": {
+            "variableId": "newvar1",
+            "type": "string"
+          }
+        }
       },
       "width": 200,
-      "height": 233,
+      "height": 250,
       "selected": false,
       "positionAbsolute": {
-        "x": 130.5,
-        "y": 240.5
+        "x": 197.76760151257253,
+        "y": -322.9897411518706
       },
       "dragging": false,
       "javaClassName": "com.example.DemoAction"
@@ -50,18 +64,18 @@
       "id": "calltoProcessNode-1768144786505",
       "type": "calltoProcessNode",
       "position": {
-        "x": 412.2236350876352,
-        "y": 240.33420977057892
+        "x": 612.827977433127,
+        "y": -400.24166115101605
       },
       "data": {
         "label": "Call Process"
       },
       "width": 200,
-      "height": 233,
-      "selected": false,
+      "height": 247,
+      "selected": true,
       "positionAbsolute": {
-        "x": 412.2236350876352,
-        "y": 240.33420977057892
+        "x": 612.827977433127,
+        "y": -400.24166115101605
       },
       "dragging": false,
       "callToProcess": "process/second.flowchartprocess.json"
@@ -70,37 +84,50 @@
       "id": "actionNode-1768144796613",
       "type": "actionNode",
       "position": {
-        "x": 711.9446408635332,
-        "y": 239.36736781646323
+        "x": 884.0152174123742,
+        "y": 97.71001423587589
       },
       "data": {
-        "label": "Action Node"
+        "label": "second node"
       },
       "width": 200,
-      "height": 233,
+      "height": 247,
       "selected": false,
       "positionAbsolute": {
-        "x": 711.9446408635332,
-        "y": 239.36736781646323
+        "x": 884.0152174123742,
+        "y": 97.71001423587589
       },
       "dragging": false,
       "javaClassName": "com.example.DemoActionlast"
+    },
+    {
+      "id": "actionNode-1768280408123",
+      "type": "actionNode",
+      "position": {
+        "x": 1318.9360942810974,
+        "y": 238.9846917061538
+      },
+      "data": {
+        "label": "3rd node"
+      },
+      "width": 200,
+      "height": 247,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 1318.9360942810974,
+        "y": 238.9846917061538
+      },
+      "dragging": false
     }
   ],
   "edges": [
-    {
-      "source": "startNode-1768144762484",
-      "sourceHandle": "exec-out",
-      "target": "actionNode-1768144777222",
-      "targetHandle": "exec-in",
-      "id": "reactflow__edge-startNode-1768144762484exec-out-actionNode-1768144777222exec-in"
-    },
     {
       "source": "actionNode-1768144777222",
       "sourceHandle": "exec-out",
       "target": "calltoProcessNode-1768144786505",
       "targetHandle": "exec-in",
-      "id": "reactflow__edge-actionNode-1768144777222exec-out-calltoProcessNode-1768144786505exec-in"
+      "id": "reactflow__edge-actionNode-1768144777222exec-out-calltoProcessNode-1768144786505exec-in",
+      "selected": false
     },
     {
       "source": "calltoProcessNode-1768144786505",
@@ -108,6 +135,21 @@
       "target": "actionNode-1768144796613",
       "targetHandle": "exec-in",
       "id": "reactflow__edge-calltoProcessNode-1768144786505exec-out-actionNode-1768144796613exec-in"
+    },
+    {
+      "source": "actionNode-1768144796613",
+      "sourceHandle": "exec-out",
+      "target": "actionNode-1768280408123",
+      "targetHandle": "exec-in",
+      "id": "reactflow__edge-actionNode-1768144796613exec-out-actionNode-1768280408123exec-in"
+    },
+    {
+      "source": "startNode-1768144762484",
+      "sourceHandle": "exec-out",
+      "target": "actionNode-1768144777222",
+      "targetHandle": "exec-in",
+      "id": "reactflow__edge-startNode-1768144762484exec-out-actionNode-1768144777222exec-in",
+      "selected": false
     }
   ]
 }
